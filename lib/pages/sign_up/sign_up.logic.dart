@@ -31,14 +31,8 @@ class SignUpPageLogic extends _$SignUpPageLogic {
     password: password,
   );
     state = state.copyWith(isLoading: false);
-  if(credential.credential != null) {
- final dref =  FirebaseDatabase.instance.ref();
- final res = await dref.child(credential.user?.uid ?? '').get();
- if(res.exists) {
-const ProfilePageRoute().go(getContext(ref)!);
- } else {
-  const CreateProfilePageRoute(isEdit: false).push(getContext(ref)!);
- }
+      if (credential.user != null) {
+        const CreateProfilePageRoute(isEdit: false).go(getContext(ref)!);
   }
     } on FirebaseAuthException catch(e) {
       state = state.copyWith(isLoading: false);

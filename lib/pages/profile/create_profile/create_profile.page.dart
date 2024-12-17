@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -102,6 +103,16 @@ class CreateProfilePage extends HookConsumerWidget {
                  return GestureDetector(
                   behavior: HitTestBehavior.opaque,
                                   onTap: () {
+                  if (nameController.text.isEmpty ||
+                      lastNameController.text.isEmpty ||
+                      dateController.text.isEmpty) {
+                    Flushbar(
+                      message: "Please enter all details",
+                      title: "Error",
+                      duration: const Duration(seconds: 2),
+                    ).show(context);
+                    return;
+                  }
                                   ref.read(pod.notifier).createProfile(firstName: nameController.text, 
                                   lastName: lastNameController.text, dob: dateController.text, isEdit: isEdit);
                                   },
