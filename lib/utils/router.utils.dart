@@ -10,7 +10,11 @@ part 'router.utils.g.dart';
 GoRouter router(Ref ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: FirebaseAuth.instance.currentUser != null ? FirebaseAuth.instance.currentUser?.displayName != null? "/profile_page" : "/create_profile" : "/login_options",
+    initialLocation: FirebaseAuth.instance.currentUser != null
+        ? FirebaseAuth.instance.currentUser?.displayName?.isNotEmpty == true
+            ? "/profile_page"
+            : "/create_profile"
+        : "/login_options",
     routes: $appRoutes,
   );
 }

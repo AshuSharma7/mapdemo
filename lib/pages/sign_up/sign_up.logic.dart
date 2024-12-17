@@ -32,6 +32,7 @@ class SignUpPageLogic extends _$SignUpPageLogic {
   );
     state = state.copyWith(isLoading: false);
       if (credential.user != null) {
+        FirebaseAuth.instance.currentUser?.updateDisplayName(null);
         const CreateProfilePageRoute(isEdit: false).go(getContext(ref)!);
   }
     } on FirebaseAuthException catch(e) {
